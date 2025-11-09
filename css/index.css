@@ -7864,6 +7864,10 @@ blockquote.pullquote.right {
   color: #343a40;
 }
 
+.todolist-item-content a {
+  color: #155724;
+}
+
 .todolist-item-status {
   padding: 3px 8px;
   border-radius: 12px;
