@@ -7791,3 +7791,132 @@ blockquote.pullquote.right {
     transform: rotate(360deg);
   }
 }
+.todolist-container {
+  display: flex;
+  max-width: 2000px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.todolist-left-column,
+.todolist-right-column {
+  flex: 1;
+  padding: 0 10px;
+}
+
+.todolist-left-column {
+  border-right: 1px solid #eee;
+}
+
+.todolist-tree-item-root {
+  border: 1px solid #e1e8ed;
+  background-color: #f8f9fa;
+  margin-bottom: 5px;
+}
+
+.todolist-tree-item-task {
+  border: 1px solid #e1e8ed;
+  background-color: #ffffff;
+  margin-top: 6px;
+}
+
+.todolist-tree-item-header {
+  display: flex;
+  align-items: center;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 10px;
+  cursor: pointer;
+}
+
+.todolist-tree-item-header:hover {
+  background-color: #e9ecef;
+}
+
+.todolist-toggle-button {
+  background: none;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 8px;
+  color: #6c757d;
+  transition: transform 0.2s ease;
+}
+
+.todolist-toggle-button::before {
+  content: "▶";
+}
+
+.todolist-toggle-button.expanded::before {
+  content: "▼";
+}
+
+.todolist-item-content {
+  flex-grow: 1;
+  font-weight: 500;
+  color: #343a40;
+}
+
+.todolist-item-status {
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.todolist-status-done {
+  color: #155724;
+}
+
+.todolist-status-doing {
+  color: #856404;
+}
+
+.todolist-status-pending {
+  color: #721c24;
+}
+
+span.todolist-item-status.todolist-status-done {
+  background-color: #d4edda;
+}
+
+span.todolist-item-status.todolist-status-doing {
+  background-color: #fff3cd;
+}
+
+span.todolist-item-status.todolist-status-pending {
+  background-color: #f8d7da;
+}
+
+.todolist-children-container {
+  margin-left: 10px;
+  padding-left: 5px;
+  display: none;
+}
+
+.todolist-children-container.expanded {
+  display: block;
+}
+
+.todolist-item-meta {
+  font-size: 0.8em;
+  color: #6c757d;
+  padding: 0 15px 0px 30px;
+}
+
+.todolist-no-children {
+  padding-left: 32px;
+}
+
+.todolist-no-children .item-meta {
+  padding-left: 15px;
+}
+
