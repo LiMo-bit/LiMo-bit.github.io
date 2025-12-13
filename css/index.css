@@ -5357,7 +5357,7 @@ figure.highlight pre .javascript .function {
   margin: 20px 0;
 }
 #article-container.diary-content {
-  font-family: $jiusi-diary-font-family;
+  font-family: handwriting, SimSun;
 }
 #article-container.diary-content blockquote + p:first-letter,
 #article-container.diary-content > p:first-child:first-letter {
