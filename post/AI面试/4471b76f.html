@@ -1,0 +1,238 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>行者无疆BSP面试 | 九思菌の个人站</title><meta name="author" content="XiaoLi"><meta name="copyright" content="XiaoLi"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="AI模拟行者无疆面试官">
+<meta property="og:type" content="article">
+<meta property="og:title" content="行者无疆BSP面试">
+<meta property="og:url" content="https://limo-bit.github.io/post/AI%E9%9D%A2%E8%AF%95/4471b76f.html">
+<meta property="og:site_name" content="九思菌の个人站">
+<meta property="og:description" content="AI模拟行者无疆面试官">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://limo-bit.github.io/img/author_avatar/ITY996_241110_2254_ITY996_author.jpg">
+<meta property="article:published_time" content="2026-11-17T08:17:20.000Z">
+<meta property="article:modified_time" content="2026-11-17T08:17:20.000Z">
+<meta property="article:author" content="XiaoLi">
+<meta property="article:tag" content="BSP工程师">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://limo-bit.github.io/img/author_avatar/ITY996_241110_2254_ITY996_author.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "行者无疆BSP面试",
+  "url": "https://limo-bit.github.io/post/AI%E9%9D%A2%E8%AF%95/4471b76f.html",
+  "image": "https://limo-bit.github.io/img/author_avatar/ITY996_241110_2254_ITY996_author.jpg",
+  "datePublished": "2026-11-17T08:17:20.000Z",
+  "dateModified": "2026-11-17T08:17:20.000Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "XiaoLi",
+      "url": "https://limo-bit.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/web_avatar/20241110225205_web_avator.jpg"><link rel="canonical" href="https://limo-bit.github.io/post/AI%E9%9D%A2%E8%AF%95/4471b76f.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'medium_zoom',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '行者无疆BSP面试',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/author_avatar/ITY996_241110_2254_ITY996_author.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">15</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/series/"><i class="fa-fw fas fa-server"></i><span> 我的系列</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 点滴岁月</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/diary/"><i class="fa-fw fas fa-book"></i><span> 岁岁年年</span></a></li><li><a class="site-page child" href="/code/"><i class="fa-fw fas fa-video"></i><span> 刷题之路</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book"></i><span> 文章汇总</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-box"></i><span> 档案馆</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-boxes-stacked"></i><span> 敬请期待</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> 宝藏链接</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/banner/ITY996_241106_2220.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">九思菌の个人站</span></a><a class="nav-page-title" href="/"><span class="site-name">行者无疆BSP面试</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/series/"><i class="fa-fw fas fa-server"></i><span> 我的系列</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 点滴岁月</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/diary/"><i class="fa-fw fas fa-book"></i><span> 岁岁年年</span></a></li><li><a class="site-page child" href="/code/"><i class="fa-fw fas fa-video"></i><span> 刷题之路</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book"></i><span> 文章汇总</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-box"></i><span> 档案馆</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-boxes-stacked"></i><span> 敬请期待</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> 宝藏链接</span></a></li></ul></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">行者无疆BSP面试</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-11-17T08:17:20.000Z" title="发表于 2026-11-17 16:17:20">2026-11-17</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-11-17T08:17:20.000Z" title="更新于 2026-11-17 16:17:20">2026-11-17</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/AI%E9%9D%A2%E8%AF%95/">AI面试</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p><img src="https://cdn.jsdelivr.net/gh/LiMo-bit/Cloud-Image-Hosting/2026-11%2F20261117165022_19feabb6.png" alt="PixPin_2026-11-17_16-19-40"> </p>
+<p>ok,下面模拟这样一种场景: 我希望你担任某公司的技术面试官,这是你公司对于求职者的要求。 而我是一个希望入职你公司的求职者,请你根据你公司对于求职者的技术要求,提出问题,要求问题尽可能多,并且尽量提供标准答案。</p>
+<p>你好！我已了解贵司智能眼镜<strong>系统功耗优化工程师</strong>的岗位需求。结合图片中的痛点与要求，我为你整理了一份涵盖<strong>底层架构、休眠唤醒、场景调优、硬件协同及系统工程</strong>五大维度的深度面试题库，并附带了工业界实战级的参考答案。</p>
+<hr>
+<p>一、 底层电源管理与内核架构（Linux &#x2F; RTOS）</p>
+<p><strong>1. 面试官提问：智能眼镜通常采用异构架构（如大核 AP 跑 Linux&#x2F;Android，小核 MCU 跑 RTOS）。请简述这两套系统在电源管理框架上的核心差异。</strong></p>
+<ul>
+<li><p><strong>参考答案</strong>：Linux 侧重于复杂的资源抽象与动态调节，通过 **Runtime PM（运行时电源管理）**管理单个设备的空闲状态，通过 **System Suspend（系统级休眠）**管理整机进入 Deep Sleep，并依赖 **Wakeup Source（唤醒源）**机制防止系统误睡。RTOS 侧重于极致的低功耗与微秒级响应，通常采用 <strong>Tickless Idle 模式</strong>，在无任务调度时关闭系统节拍定时器，直接根据下一个定时器中断时间计算并进入对应的低功耗模式（如 Stop 或 Standby）。</p>
+<a href="/post/%E7%A7%91%E6%99%AE/b5b1cb8f.html" title="异构架构">异构架构</a></li>
+</ul>
+<p><strong>2. 面试官提问：在 Linux 内核中，驱动工程师写的代码经常导致系统无法进入深度休眠（Suspend 失败或瞬间唤醒）。你通常如何排查这类问题？</strong></p>
+<ul>
+<li><strong>参考答案</strong>：首先查看 <code>/sys/kernel/debug/wakeup_sources</code> 节点，观察 <code>active_count</code> 和 <code>active_since</code> 字段，找出持锁时间最长或未释放的 Wakeup Source。其次开启内核日志 <code>echo 1 &gt; /sys/module/printk/parameters/console_suspend</code> 和 <code>pm_debug_messages</code>，抓取休眠过程中的驱动 <code>suspend()</code> 回调报错或中断唤醒信息。最后通过 <code>/sys/power/wakeup_count</code> 确认休眠同步机制是否被频繁打断。</li>
+</ul>
+<p><strong>3. 面试官提问：请解释什么是时钟树（Clock Tree）的门控（Clock Gating），以及它在功耗优化中的作用与潜在风险。</strong></p>
+<ul>
+<li><strong>参考答案</strong>：Clock Gating 是指在芯片内部模块不工作时，切断供给该模块的时钟信号，从而消除晶体管翻转带来的动态功耗。在内核中通过 <code>clk_disable_unprepare()</code> 实现。潜在风险是如果外设寄存器尚未完成总线读写操作就强行关闭时钟，会导致总线挂死（Bus Hang）或系统 HardFault，因此必须严格遵循外设下电与关时钟的时序。</li>
+</ul>
+<p><strong>4. 面试官提问：DVFS（动态电压频率调整）的底层原理是什么？在智能眼镜这类热敏感设备上配置 DVFS 策略需要注意什么？</strong></p>
+<ul>
+<li><strong>参考答案</strong>：动态功耗与频率成正比，与电压的平方成正比（(P \propto C \cdot V^2 \cdot f)）。DVFS 通过监测 CPU 负载，在低负载时同步降低主频和供电电压以大幅削减功耗。在智能眼镜上配置时，需注意升频必须<strong>先升压后升频</strong>，降频必须<strong>先降频后降压</strong>；同时要严格限制最高频点（OPP）的驻留时间，防止镜腿局部温度过高导致用户佩戴不适。</li>
+</ul>
+<hr>
+<p>二、 休眠、浅睡、深睡状态切换与待机漏电</p>
+<p><strong>5. 面试官提问：图片中提到“待机漏电”和“休眠状态切换异常”。当硬件报出整机待机电流比预期高出 2mA 时，你的软硬件协同排查思路是什么？</strong></p>
+<ul>
+<li><strong>参考答案</strong>：第一步执行<strong>模块隔离法</strong>，利用功耗分析仪（如 Monsoon 或 Keysight）抓取电流波形，观察是底噪抬高还是周期性脉冲。第二步检查<strong>芯片引脚状态（GPIO 配置）</strong>，确认休眠前未使用的 GPIO 是否配置为高阻态（Analog&#x2F;High-Z），排查是否存在上下拉电阻冲突导致的灌电流或漏电流。第三步检查 <strong>PMIC 各路 LDO&#x2F;Buck 的使能状态</strong>，通过 I2C 读取 PMIC 寄存器，确认非常供电轨（Power Rail）是否在深睡时彻底关断。</li>
+</ul>
+<p><strong>6. 面试官提问：系统从深睡（Deep Sleep）被唤醒后，如果发现某些外设（如传感器或摄像头）工作异常，通常是什么原因造成的？</strong></p>
+<ul>
+<li><strong>参考答案</strong>：核心原因在于<strong>掉电上下文丢失与上电时序违例</strong>。深睡时外设电源域（Power Domain）被断电，内部寄存器状态清零，唤醒后驱动未在 <code>resume()</code> 回调中重新初始化寄存器。此外，PMIC 重新上电后，各路电压稳定时间（Ramp-up Time）不足就开始发送 I2C&#x2F;SPI 初始化指令，也会导致外设通信失败。</li>
+</ul>
+<p><strong>7. 面试官提问：在双芯片架构（AP + MCU）中，如何设计两者之间的休眠唤醒握手协议，以避免死锁或消息丢失？</strong></p>
+<ul>
+<li><strong>参考答案</strong>：必须采用<strong>带硬件流控与超时重传的异步握手机制</strong>。通常使用两根专用 GPIO 脚：<code>AP_WAKE_MCU</code> 和 <code>MCU_WAKE_AP</code>。当一方需要发送 SPI&#x2F;UART 数据时，先拉高唤醒脚，等待对方回拉确认脚或等待固定延时（确保对方已退出深睡并恢复外设时钟）后再传输数据；数据传输完毕且收到 ACK 后，双方再各自释放唤醒锁进入休眠。</li>
+</ul>
+<hr>
+<p>三、 典型高功耗场景调优（唤醒、手势、摄像头、屏幕）</p>
+<p><strong>8. 面试官提问：智能眼镜在“语音唤醒”或“手势识别”常开（Always-On）场景下极易耗电，系统架构上应该如何做功耗优化？</strong></p>
+<ul>
+<li><strong>参考答案</strong>：核心思路是<strong>算力下沉与分级唤醒</strong>。绝不能让主控 AP 保持唤醒来运行算法，而应将低采样率的传感器（IMU、麦克风）挂载到低功耗协处理器（Sensor Hub 或 MCU）上。第一级由传感器硬件自带的 FIFO 和中断（如显著运动检测 SMD 或硬件 VAD 语音活动检测）触发；第二级唤醒小核运行轻量级算法进行二次确认；只有确认有效指令后，才最终唤醒大核 AP 处理复杂业务。</li>
+</ul>
+<p><strong>9. 面试官提问：摄像头（Camera）和微型显示屏（Micro-OLED&#x2F;Micro-LED）打开时功耗飙升，从驱动和系统层面有哪些降功耗手段？</strong></p>
+<ul>
+<li><strong>参考答案</strong>：对于<strong>摄像头</strong>，应优化帧率与分辨率，在非拍照&#x2F;录像预览阶段使用低帧率，配置 Sensor 进入硬件 Standby 而非完全断电以减少重启开销，并合理设置 ISP 的时钟频率与 MIPI CSI 速率。对于<strong>屏幕</strong>，利用自发光屏幕特性，在 UI 设计上多用纯黑背景以降低像素点亮功耗；驱动层开启局部刷新（Partial Update）、动态帧率调整（如静止画面降至 1Hz 或 15Hz），并根据环境光传感器（ALS）平滑调节亮度占空比。</li>
+</ul>
+<p><strong>10. 面试官提问：当用户摘下眼镜（佩戴检测触发）时，系统应该执行怎样的分级功耗收敛策略？</strong></p>
+<ul>
+<li><strong>参考答案</strong>：应采用<strong>阶梯式状态机降级</strong>。摘下后 0-5 秒，立即关闭屏幕背光、暂停非必要传感器数据采集（如陀螺仪），进入浅睡状态（Light Sleep）。摘下超过 30 秒，断开蓝牙音频链路（保留低功耗 BLE 广播或进入长连接间隔 Sniff 模式），关闭 Wi-Fi，通知小核接管基础状态，大核 AP 彻底进入深度休眠（Deep Sleep），将整机底电流压至微安级。</li>
+</ul>
+<hr>
+<p>四、 硬件电源树与测试闭环</p>
+<p><strong>11. 面试官提问：请结合 PMIC（电源管理芯片）的工作原理，说明 Buck（降压转换器）和 LDO（低压差线性稳压器）在智能眼镜中各自的应用场景及选型考量。</strong></p>
+<ul>
+<li><strong>参考答案</strong>：<strong>Buck</strong> 转换效率高（通常 85%-95%），适合大电流、压差大的核心供电，如 CPU 核心、内存、屏幕驱动，但在极轻载时开关损耗占比变大，需确认 PMIC 是否支持自动切换至 **PFM（脉冲频率调制）**模式以提升轻载效率。<strong>LDO</strong> 效率较低但输出纹波极小、无开关噪声，适合对电源纯净度要求高的模拟电路，如摄像头模拟供电（AVDD）、音频 Codec 和射频模块。</li>
+</ul>
+<p><strong>12. 面试官提问：什么是“功耗基线（Power Baseline）”和“功耗预算（Power Budget）”？你在过往项目中是如何建立和拆解它们的？</strong></p>
+<ul>
+<li><strong>参考答案</strong>：<strong>功耗预算</strong>是在产品立项阶段，根据电池容量（如智能眼镜常见的 150mAh-300mAh）和目标续航时间，自顶向下将总电量拆解分配给各个硬件模块（屏幕、芯片、传感器、射频）和各个核心场景（待机、拍照、通话、导航）的理论电流上限。<strong>功耗基线</strong>是在工程样机阶段，通过标准测试脚本在屏蔽箱&#x2F;恒温环境下测得的各场景真实电流基准值，用于后续每次软件版本迭代时的回归对比，防止新合入的代码引入功耗劣化（Regression）。</li>
+</ul>
+<p><strong>13. 面试官提问：请描述一次你从“发现功耗异常”到“最终解决并验证闭环”的完整实战经历。</strong></p>
+<ul>
+<li><strong>参考答案（回答框架建议）</strong>：面试时请遵循 <strong>STAR 法则</strong>。<strong>背景（S）</strong>：某款穿戴设备在纯待机状态下续航缩水 30%。<strong>定位（T&#x2F;A）</strong>：使用功耗仪抓包发现每隔 5 秒出现一个 40mA、持续 200ms 的电流尖峰；通过内核 ftrace 抓取唤醒中断，定位到是某个第三方传感器驱动在定时器中轮询状态；进一步查阅手册发现该传感器支持硬件中断模式。<strong>解决与闭环（R）</strong>：修改驱动将其改为中断触发模式，在无事件时让传感器进入 Deep Power Down；重新测试待机波形，脉冲消失，平均待机电流从 1.8mA 降至 0.45mA，并将该测试用例加入每日自动化功耗巡检流水线。</li>
+</ul>
+<hr>
+<p>如果你想针对某一部分做更深入的实战演练，我们可以从以下方向继续：</p>
+<ul>
+<li>挑选其中 <strong>2-3 道题</strong> 进行<strong>模拟实战问答</strong>，由我来点评你的回答细节</li>
+<li>深入拆解 <strong>Linux 电源管理子系统</strong>（如 Runtime PM 与 Wakeup Source 的源码级机制）</li>
+<li>探讨 <strong>智能眼镜典型场景的功耗预算表</strong>（具体电流数值拆解）</li>
+</ul>
+<p>你想先从哪一项开始？</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://limo-bit.github.io">XiaoLi</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://limo-bit.github.io/post/AI%E9%9D%A2%E8%AF%95/4471b76f.html">https://limo-bit.github.io/post/AI%E9%9D%A2%E8%AF%95/4471b76f.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://limo-bit.github.io" target="_blank">九思菌の个人站</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/BSP%E5%B7%A5%E7%A8%8B%E5%B8%88/">BSP工程师</a></div><div class="post-share"><div class="social-share" data-image="/img/author_avatar/ITY996_241110_2254_ITY996_author.jpg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/post/%E7%A7%91%E6%99%AE/b5b1cb8f.html" title="异构架构"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">异构架构</div></div><div class="info-2"><div class="info-item-1">嵌入式中的异构架构指的是什么</div></div></div></a><a class="pagination-related" href="/post/%E8%B8%A9%E5%9D%91%E6%97%A5%E5%B8%B8/9c0b20f4.html" title="vmware_ubuntu中没有共享文件夹"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">vmware_ubuntu中没有共享文件夹</div></div><div class="info-2"><div class="info-item-1">vmware_ubuntu中没有共享文件夹</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/author_avatar/ITY996_241110_2254_ITY996_author.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">XiaoLi</div><div class="author-info-description">唯热爱可抵山河漫长</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">15</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/LiMo-bit"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">新人报到！欢迎加入本站！</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/post/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/8486a345.html" title="Linux内核电源管理">Linux内核电源管理</a><time datetime="2026-11-17T09:08:46.000Z" title="更新于 2026-11-17 17:08:46">2026-11-17</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/post/%E7%A7%91%E6%99%AE/b5b1cb8f.html" title="异构架构">异构架构</a><time datetime="2026-11-17T08:37:00.000Z" title="更新于 2026-11-17 16:37:00">2026-11-17</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/post/AI%E9%9D%A2%E8%AF%95/4471b76f.html" title="行者无疆BSP面试">行者无疆BSP面试</a><time datetime="2026-11-17T08:17:20.000Z" title="更新于 2026-11-17 16:17:20">2026-11-17</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/post/%E8%B8%A9%E5%9D%91%E6%97%A5%E5%B8%B8/93d2bcfe.html" title="拓展磁盘导致系统无法启动">拓展磁盘导致系统无法启动</a><time datetime="2026-11-16T09:40:33.000Z" title="更新于 2026-11-16 17:40:33">2026-11-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/post/%E8%B8%A9%E5%9D%91%E6%97%A5%E5%B8%B8/9c0b20f4.html" title="vmware_ubuntu中没有共享文件夹">vmware_ubuntu中没有共享文件夹</a><time datetime="2026-11-16T09:40:33.000Z" title="更新于 2026-11-16 17:40:33">2026-11-16</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By XiaoLi</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.1</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.1"></script><script src="/js/main.js?v=5.5.1"></script><script src="/js/tw_cn.js?v=5.5.1"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js"></script><div class="js-pjax"></div><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/dist/canvas-fluttering-ribbon.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
