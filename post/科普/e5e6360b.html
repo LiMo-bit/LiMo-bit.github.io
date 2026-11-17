@@ -1,0 +1,285 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Linux唤醒源记录节点 | 九思菌の个人站</title><meta name="author" content="XiaoLi"><meta name="copyright" content="XiaoLi"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="linux中用于排查休眠失败等问题的节点">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux唤醒源记录节点">
+<meta property="og:url" content="https://limo-bit.github.io/post/%E7%A7%91%E6%99%AE/e5e6360b.html">
+<meta property="og:site_name" content="九思菌の个人站">
+<meta property="og:description" content="linux中用于排查休眠失败等问题的节点">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://limo-bit.github.io/img/author_avatar/ITY996_241110_2254_ITY996_author.jpg">
+<meta property="article:published_time" content="2026-11-17T12:26:20.000Z">
+<meta property="article:modified_time" content="2026-11-17T12:26:20.000Z">
+<meta property="article:author" content="XiaoLi">
+<meta property="article:tag" content="linux">
+<meta property="article:tag" content="电源管理">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://limo-bit.github.io/img/author_avatar/ITY996_241110_2254_ITY996_author.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Linux唤醒源记录节点",
+  "url": "https://limo-bit.github.io/post/%E7%A7%91%E6%99%AE/e5e6360b.html",
+  "image": "https://limo-bit.github.io/img/author_avatar/ITY996_241110_2254_ITY996_author.jpg",
+  "datePublished": "2026-11-17T12:26:20.000Z",
+  "dateModified": "2026-11-17T12:26:20.000Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "XiaoLi",
+      "url": "https://limo-bit.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/web_avatar/20241110225205_web_avator.jpg"><link rel="canonical" href="https://limo-bit.github.io/post/%E7%A7%91%E6%99%AE/e5e6360b.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'medium_zoom',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Linux唤醒源记录节点',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/author_avatar/ITY996_241110_2254_ITY996_author.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">17</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">16</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/series/"><i class="fa-fw fas fa-server"></i><span> 我的系列</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 点滴岁月</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/diary/"><i class="fa-fw fas fa-book"></i><span> 岁岁年年</span></a></li><li><a class="site-page child" href="/code/"><i class="fa-fw fas fa-video"></i><span> 刷题之路</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book"></i><span> 文章汇总</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-box"></i><span> 档案馆</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-boxes-stacked"></i><span> 敬请期待</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> 宝藏链接</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/banner/ITY996_241106_2220.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">九思菌の个人站</span></a><a class="nav-page-title" href="/"><span class="site-name">Linux唤醒源记录节点</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/series/"><i class="fa-fw fas fa-server"></i><span> 我的系列</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 点滴岁月</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/diary/"><i class="fa-fw fas fa-book"></i><span> 岁岁年年</span></a></li><li><a class="site-page child" href="/code/"><i class="fa-fw fas fa-video"></i><span> 刷题之路</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book"></i><span> 文章汇总</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-box"></i><span> 档案馆</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-boxes-stacked"></i><span> 敬请期待</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> 宝藏链接</span></a></li></ul></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">Linux唤醒源记录节点</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-11-17T12:26:20.000Z" title="发表于 2026-11-17 20:26:20">2026-11-17</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-11-17T12:26:20.000Z" title="更新于 2026-11-17 20:26:20">2026-11-17</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%A7%91%E6%99%AE/">科普</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h2 id="总述"><a href="#总述" class="headerlink" title="总述"></a>总述</h2><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/jiafan-ma/p/18200874">Wakeup Source框架设计与实现 - Jayfan_Ma - 博客园</a></p>
+<p><strong><code>wakeup_sources</code> 是 Linux 内核电源管理框架中用于记录、统计和管理所有“唤醒源（Wakeup Source）”状态与统计信息的调试节点。</strong> 它通常位于 <code>/sys/kernel/debug/wakeup_sources</code> 目录下，是排查系统无法休眠或异常唤醒的核心工具。</p>
+<ul>
+<li><strong>硬件事件</strong>：例如电源按键中断、RTC 闹钟定时器、USB 插入检测、网络数据包到达（Wake-on-LAN）。</li>
+<li><strong>软件事件</strong>：例如内核驱动或用户空间持有的唤醒锁（Wake Lock，常见于 Android 系统，通过 <code>/sys/power/wake_lock</code> 创建）。</li>
+</ul>
+<h2 id="wakeup-sources节点用处"><a href="#wakeup-sources节点用处" class="headerlink" title="wakeup_sources节点用处"></a>wakeup_sources节点用处</h2><p>在日常开发和功耗优化中，它主要有以下三大核心用途：</p>
+<ul>
+<li><strong>排查“系统睡不下去”的元凶</strong>：当系统尝试进入休眠（如 <code>echo mem &gt; /sys/power/state</code>）却失败，或者在息屏后依然耗电严重时，可以通过查看该节点找出是哪个模块一直处于活跃状态（持锁不放）。</li>
+<li><strong>定位“系统被谁唤醒”的来源</strong>：如果设备在休眠期间频繁自动亮屏或唤醒，可以通过对比休眠前后的触发次数变化，精准定位触发中断的硬件驱动。</li>
+<li><strong>评估系统功耗表现</strong>：通过统计各个模块的累计持锁时间（<code>total_time</code>）和最长单次持锁时间（<code>max_time</code>），开发者可以量化评估哪个驱动或服务最耗电。</li>
+</ul>
+<h2 id="怎么看懂它的内容"><a href="#怎么看懂它的内容" class="headerlink" title="怎么看懂它的内容"></a>怎么看懂它的内容</h2><blockquote>
+<p>cat &#x2F;sys&#x2F;kernel&#x2F;debug&#x2F;wakeup_sources</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th>含义说明</th>
+<th>排查重点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>name</td>
+<td>唤醒源的名称(通常是驱动名、中断名或者锁名)</td>
+<td>定位具体是哪个硬件或者软件模块</td>
+</tr>
+<tr>
+<td>active_count</td>
+<td>该唤醒源被激活的总次数</td>
+<td>观察休眠前后该数值是否增加，可判断是谁唤醒了系统</td>
+</tr>
+<tr>
+<td>event_count</td>
+<td>触发唤醒事件的总次数</td>
+<td>与active_count配合分析事件频率</td>
+</tr>
+<tr>
+<td>wakeup_count</td>
+<td>该唤醒源导致系统休眠中止(abort)的次数</td>
+<td>数值持续增加，说明它一直在打断休眠流程</td>
+</tr>
+<tr>
+<td>expire_count</td>
+<td>超时自动释放的次数(针对设置了超时时间的锁)</td>
+<td>判断是否存在超时机制的唤醒源</td>
+</tr>
+<tr>
+<td>active_since</td>
+<td>当前正处于激活状态的持续时间(毫秒)</td>
+<td>最关键字段。只要该值大于0，说明它正在阻止系统进入休眠。</td>
+</tr>
+<tr>
+<td>total_time</td>
+<td>自系统启动以来，该唤醒源累计激活的总时间</td>
+<td>数值越大，说明该模块让系统保持唤醒的时间越长，越耗电。</td>
+</tr>
+<tr>
+<td>max_time</td>
+<td>单次连续激活的最长时间</td>
+<td>排查是否有驱动在某个时刻长时间卡住不释放锁。</td>
+</tr>
+<tr>
+<td>last_change</td>
+<td>最后一次状态发生变化(激活或者释放)的系统时间戳</td>
+<td>结合内核日志时间，还原现场状态</td>
+</tr>
+</tbody></table>
+<h2 id="典型实战排查逻辑"><a href="#典型实战排查逻辑" class="headerlink" title="典型实战排查逻辑"></a>典型实战排查逻辑</h2><ul>
+<li><p><strong>场景 A：设备无法进入深度休眠</strong><br>执行 <code>cat /sys/kernel/debug/wakeup_sources</code>，重点筛选 <strong><code>active_since</code> 不为 0</strong> 的行。如果发现某个驱动（例如 <code>usb_otg</code> 或某个自研驱动锁）的 <code>active_since</code> 一直在增长，说明它一直没有调用 <code>pm_relax()</code> 或释放锁，直接导致系统无法休眠。</p>
+</li>
+<li><p><strong>场景 B：设备休眠后瞬间自动唤醒</strong><br>记录休眠前的 <code>wakeup_count</code> 和 <code>active_count</code>。触发休眠并观察到异常唤醒后，再次查看该文件，对比<strong>哪一行的计数增加了</strong>，即可锁定触发唤醒的中断源。</p>
+<blockquote>
+<p><strong>设备级关联节点</strong>：如果你已经锁定了某个具体外设，也可以直接访问 <code>/sys/devices/&lt;设备路径&gt;/power/</code> 目录，里面同样包含该设备专属的 <code>wakeup_count</code>、<code>wakeup_active_count</code>、<code>wakeup_total_time_ms</code> 等独立属性文件。</p>
+</blockquote>
+</li>
+</ul>
+<blockquote>
+<p>event_count和active_count的区别：</p>
+<ul>
+<li><strong><code>event_count</code>（事件总数）</strong>：只要驱动上报了一次唤醒事件（调用一次 <code>pm_wakeup_event</code> 或 <code>pm_stay_awake</code>），它就 <strong>+1</strong>。不管当前是不是已经处于激活状态。</li>
+<li><strong><code>active_count</code>（激活次数）</strong>：只有当该唤醒源<strong>原本处于休眠&#x2F;空闲状态（<code>active == false</code>）</strong>，然后被重新激活变成活跃状态时，它才 <strong>+1</strong>。</li>
+</ul>
+</blockquote>
+<h2 id="在功耗排查中各自有什么用"><a href="#在功耗排查中各自有什么用" class="headerlink" title="在功耗排查中各自有什么用"></a>在功耗排查中各自有什么用</h2><ul>
+<li><strong>看 <code>active_count</code>（判断“打扰频率”）</strong>：<br>它反映了这个模块<strong>独立发起工作周期的次数</strong>。如果 <code>active_count</code> 在短时间内飙升，说明硬件中断或定时器在频繁地一开一关（例如传感器每 100 毫秒唤醒一次系统，处理 5 毫秒后又睡下），导致系统无法进入深度休眠。</li>
+<li><strong>看 <code>event_count</code>（判断“业务吞吐量”）</strong>：<br>结合 <code>active_count</code> 一起看。如果 <code>active_count</code> 只有 5 次，但 <code>event_count</code> 高达 5000 次，说明每次唤醒后，该模块都在<strong>集中批量处理大量数据</strong>（例如网络下载或高速传感器采样），这是比较健康且省电的批处理模式。</li>
+</ul>
+<h2 id="如何在驱动代码中注册wakeup-source并使用pm-stay-awake-pm-relax-防止系统休眠"><a href="#如何在驱动代码中注册wakeup-source并使用pm-stay-awake-pm-relax-防止系统休眠" class="headerlink" title="如何在驱动代码中注册wakeup_source并使用pm_stay_awake()&#x2F;pm_relax()防止系统休眠"></a>如何在驱动代码中注册wakeup_source并使用pm_stay_awake()&#x2F;pm_relax()防止系统休眠</h2><h3 id="方式一：基于-struct-device-的标准接口（最推荐）"><a href="#方式一：基于-struct-device-的标准接口（最推荐）" class="headerlink" title="方式一：基于 struct device 的标准接口（最推荐）"></a>方式一：基于 <code>struct device</code> 的标准接口（最推荐）</h3><p>如果驱动已经关联了物理设备结构体（<code>struct device *dev</code>，如 platform、I2C、SPI 驱动），内核已经封装好了自动分配和释放生命周期的接口，无需手动管理 <code>struct wakeup_source</code> 指针。</p>
+<ul>
+<li><strong>初始化</strong>：调用 <code>device_init_wakeup(dev, true)</code>，内核会自动为该设备创建并注册一个同名的 <code>wakeup_source</code>。</li>
+<li><strong>阻止休眠（加锁）</strong>：在中断上下文或开始处理业务时调用 <code>pm_stay_awake(dev)</code>。</li>
+<li><strong>允许休眠（解锁）</strong>：在工作队列或业务处理完成后调用 <code>pm_relax(dev)</code>。</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;linux/module.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;linux/platform_device.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;linux/interrupt.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;linux/workqueue.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;linux/pm_wakeup.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">my_dev_data</span> &#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">device</span> *<span class="title">dev</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">work_struct</span> <span class="title">rx_work</span>;</span></span><br><span class="line">    <span class="type">int</span> irq;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 1. 异步业务处理函数（工作队列） */</span></span><br><span class="line"><span class="type">static</span> <span class="type">void</span> <span class="title function_">my_rx_work_handler</span><span class="params">(<span class="keyword">struct</span> work_struct *work)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">my_dev_data</span> *<span class="title">data</span> =</span> container_of(work, <span class="keyword">struct</span> my_dev_data, rx_work);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* 模拟耗时的数据读取与处理（此时系统不会进入休眠） */</span></span><br><span class="line">    dev_info(data-&gt;dev, <span class="string">&quot;Processing data...\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* 2. 业务处理完成，释放唤醒锁，允许系统进入休眠 */</span></span><br><span class="line">    pm_relax(data-&gt;dev);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 3. 硬件中断处理函数 */</span></span><br><span class="line"><span class="type">static</span> <span class="type">irqreturn_t</span> <span class="title function_">my_irq_handler</span><span class="params">(<span class="type">int</span> irq, <span class="type">void</span> *dev_id)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">my_dev_data</span> *<span class="title">data</span> =</span> dev_id;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* 通知 PM 框架保持系统唤醒（可在中断上下文安全调用） */</span></span><br><span class="line">    pm_stay_awake(data-&gt;dev);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* 调度下半部工作队列去处理具体业务 */</span></span><br><span class="line">    schedule_work(&amp;data-&gt;rx_work);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> IRQ_HANDLED;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="type">int</span> <span class="title function_">my_driver_probe</span><span class="params">(<span class="keyword">struct</span> platform_device *pdev)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">my_dev_data</span> *<span class="title">data</span>;</span></span><br><span class="line">    <span class="type">int</span> ret;</span><br><span class="line"></span><br><span class="line">    data = devm_kzalloc(&amp;pdev-&gt;dev, <span class="keyword">sizeof</span>(*data), GFP_KERNEL);</span><br><span class="line">    <span class="keyword">if</span> (!data)</span><br><span class="line">        <span class="keyword">return</span> -ENOMEM;</span><br><span class="line"></span><br><span class="line">    data-&gt;dev = &amp;pdev-&gt;dev;</span><br><span class="line">    platform_set_drvdata(pdev, data);</span><br><span class="line">    INIT_WORK(&amp;data-&gt;rx_work, my_rx_work_handler);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* 4. 使能设备的唤醒能力（自动注册 wakeup_source） */</span></span><br><span class="line">    device_init_wakeup(&amp;pdev-&gt;dev, <span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* 假设从设备树获取中断并注册（省略资源获取细节） */</span></span><br><span class="line">    data-&gt;irq = platform_get_irq(pdev, <span class="number">0</span>);</span><br><span class="line">    ret = devm_request_irq(&amp;pdev-&gt;dev, data-&gt;irq, my_irq_handler,</span><br><span class="line">                           IRQF_TRIGGER_FALLING, <span class="string">&quot;my_wakeup_irq&quot;</span>, data);</span><br><span class="line">    <span class="keyword">if</span> (ret)</span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* 可选：如果需要在深度休眠期间依然能被该硬件中断唤醒，需使能 IRQ 唤醒 */</span></span><br><span class="line">    enable_irq_wake(data-&gt;irq);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="type">void</span> <span class="title function_">my_driver_remove</span><span class="params">(<span class="keyword">struct</span> platform_device *pdev)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">my_dev_data</span> *<span class="title">data</span> =</span> platform_get_drvdata(pdev);</span><br><span class="line"></span><br><span class="line">    disable_irq_wake(data-&gt;irq);</span><br><span class="line">    cancel_work_sync(&amp;data-&gt;rx_work);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* 5. 注销并清理设备的 wakeup_source */</span></span><br><span class="line">    device_init_wakeup(&amp;pdev-&gt;dev, <span class="literal">false</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="方式二：手动注册独立的-struct-wakeup-source"><a href="#方式二：手动注册独立的-struct-wakeup-source" class="headerlink" title="方式二：手动注册独立的 struct wakeup_source"></a>方式二：手动注册独立的 <code>struct wakeup_source</code></h3><blockquote>
+<p>当你的驱动没有绑定具体的 <code>struct device</code>（例如纯内核线程、字符设备模块），或者同一个设备内部需要<strong>多个独立的唤醒源</strong>来分别统计不同子模块的耗电时，可以直接操作 <code>wakeup_source</code> 结构体。</p>
+<ul>
+<li><strong>注册</strong>：<code>wakeup_source_register(dev, &quot;自定义名称&quot;)</code>（传入 <code>dev</code> 可建立 sysfs 软链接，传入 <code>NULL</code> 则为纯软件源）。</li>
+<li><strong>加锁与解锁</strong>：使用对应的 <code>__pm_stay_awake(ws)</code> 和 <code>__pm_relax(ws)</code>。</li>
+<li><strong>注销</strong>：模块卸载时必须调用 <code>wakeup_source_unregister(ws)</code> 防止内存泄漏。</li>
+</ul>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;linux/pm_wakeup.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="class"><span class="keyword">struct</span> <span class="title">wakeup_source</span> *<span class="title">my_ws</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* 初始化时注册 */</span></span><br><span class="line"><span class="type">static</span> <span class="type">int</span> __init <span class="title function_">my_mod_init</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">/* 在 /sys/class/wakeup/ 中将显示为 &quot;my_custom_lock&quot; */</span></span><br><span class="line">    my_ws = wakeup_source_register(<span class="literal">NULL</span>, <span class="string">&quot;my_custom_lock&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span> (!my_ws)</span><br><span class="line">        <span class="keyword">return</span> -ENOMEM;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 业务中防止休眠 */</span></span><br><span class="line"><span class="type">static</span> <span class="type">void</span> <span class="title function_">handle_critical_task</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    __pm_stay_awake(my_ws);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* 执行不能被休眠打断的任务 */</span></span><br><span class="line"></span><br><span class="line">    __pm_relax(my_ws);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 退出时注销 */</span></span><br><span class="line"><span class="type">static</span> <span class="type">void</span> __exit <span class="title function_">my_mod_exit</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    wakeup_source_unregister(my_ws);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>驱动开发中的 4 个避坑要点</p>
+<ul>
+<li><strong>必须严格成对调用（否则导致永不休眠）</strong>：<code>pm_stay_awake()</code> 内部没有嵌套引用计数（这一点与 Regulator 不同）。连续调用 3 次 <code>pm_stay_awake(dev)</code>，只要调用 <strong>1 次</strong> <code>pm_relax(dev)</code> 就会立刻解除激活状态；但如果调用了 <code>pm_stay_awake()</code> 后，在异常分支提前 <code>return</code> 而漏掉了 <code>pm_relax()</code>，系统将永远无法进入休眠（<code>active_time_ms</code> 会一直增长）。</li>
+<li><strong>支持中断上下文</strong>：<code>pm_stay_awake()</code>、<code>pm_relax()</code> 以及带超时的 <code>pm_wakeup_event()</code> 内部均使用自旋锁（spinlock）保护，<strong>可以安全地在硬中断（IRQ Handler）或原子上下文中直接调用</strong>。</li>
+<li><strong>超时保护机制（防死锁利器）</strong>：如果业务流程涉及与用户空间或外部芯片通信，担心对方无响应导致永远无法调用 <code>pm_relax()</code>，建议改用带超时的 <strong><code>pm_wakeup_dev_event(dev, msec, true)</code></strong>（或 <code>__pm_wakeup_event(ws, msec)</code>）。一旦超过 <code>msec</code> 毫秒，内核定时器会自动执行类似 <code>pm_relax()</code> 的释放操作。</li>
+<li><strong>区分“阻止休眠”与“唤醒系统”</strong>：<ul>
+<li><code>pm_stay_awake()</code> 的作用是<strong>系统当前醒着时，阻止它睡下去</strong>。</li>
+<li>如果系统<strong>已经处于深度休眠（Suspend to RAM）</strong>，需要靠硬件引脚电平变化把 CPU 拉起来，必须在驱动中额外调用 <code>enable_irq_wake(irq)</code>（并在设备树节点中配置 <code>wakeup-source;</code> 属性），否则休眠期间硬件中断会被中断控制器屏蔽。</li>
+</ul>
+</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://limo-bit.github.io">XiaoLi</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://limo-bit.github.io/post/%E7%A7%91%E6%99%AE/e5e6360b.html">https://limo-bit.github.io/post/%E7%A7%91%E6%99%AE/e5e6360b.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://limo-bit.github.io" target="_blank">九思菌の个人站</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/linux/">linux</a><a class="post-meta__tags" href="/tags/%E7%94%B5%E6%BA%90%E7%AE%A1%E7%90%86/">电源管理</a></div><div class="post-share"><div class="social-share" data-image="/img/author_avatar/ITY996_241110_2254_ITY996_author.jpg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/post/%E7%A7%91%E6%99%AE/159f219f.html" title="硬中断以及原子操作"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">硬中断以及原子操作</div></div><div class="info-2"><div class="info-item-1">硬中断以及原子操作中的动作</div></div></div></a><a class="pagination-related" href="/post/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/8486a345.html" title="Linux内核电源管理"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">Linux内核电源管理</div></div><div class="info-2"><div class="info-item-1">Linux内核电源管理</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/post/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/8486a345.html" title="Linux内核电源管理"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-11-17</div><div class="info-item-2">Linux内核电源管理</div></div><div class="info-2"><div class="info-item-1">Linux内核电源管理</div></div></div></a><a class="pagination-related" href="/post/%E7%A7%91%E6%99%AE/159f219f.html" title="硬中断以及原子操作"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-11-17</div><div class="info-item-2">硬中断以及原子操作</div></div><div class="info-2"><div class="info-item-1">硬中断以及原子操作中的动作</div></div></div></a><a class="pagination-related" href="/post/%E8%B8%A9%E5%9D%91%E6%97%A5%E5%B8%B8/93d2bcfe.html" title="拓展磁盘导致系统无法启动"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-11-16</div><div class="info-item-2">拓展磁盘导致系统无法启动</div></div><div class="info-2"><div class="info-item-1">Expanding the disk caused the system to fail to boot.</div></div></div></a><a class="pagination-related" href="/post/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/47002a54.html" title="块设备驱动"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-11-14</div><div class="info-item-2">块设备驱动</div></div><div class="info-2"><div class="info-item-1">linux块设备驱动</div></div></div></a><a class="pagination-related" href="/post/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/1db4c809.html" title="字符设备驱动"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-11-14</div><div class="info-item-2">字符设备驱动</div></div><div class="info-2"><div class="info-item-1">linux字符设备驱动</div></div></div></a><a class="pagination-related" href="/post/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/1f214e99.html" title="杂设备驱动"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-11-15</div><div class="info-item-2">杂设备驱动</div></div><div class="info-2"><div class="info-item-1">linux杂设备驱动</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/author_avatar/ITY996_241110_2254_ITY996_author.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">XiaoLi</div><div class="author-info-description">唯热爱可抵山河漫长</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">17</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">16</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/LiMo-bit"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">新人报到！欢迎加入本站！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">总述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#wakeup-sources%E8%8A%82%E7%82%B9%E7%94%A8%E5%A4%84"><span class="toc-number">2.</span> <span class="toc-text">wakeup_sources节点用处</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%8E%E4%B9%88%E7%9C%8B%E6%87%82%E5%AE%83%E7%9A%84%E5%86%85%E5%AE%B9"><span class="toc-number">3.</span> <span class="toc-text">怎么看懂它的内容</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B8%E5%9E%8B%E5%AE%9E%E6%88%98%E6%8E%92%E6%9F%A5%E9%80%BB%E8%BE%91"><span class="toc-number">4.</span> <span class="toc-text">典型实战排查逻辑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9C%A8%E5%8A%9F%E8%80%97%E6%8E%92%E6%9F%A5%E4%B8%AD%E5%90%84%E8%87%AA%E6%9C%89%E4%BB%80%E4%B9%88%E7%94%A8"><span class="toc-number">5.</span> <span class="toc-text">在功耗排查中各自有什么用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%9C%A8%E9%A9%B1%E5%8A%A8%E4%BB%A3%E7%A0%81%E4%B8%AD%E6%B3%A8%E5%86%8Cwakeup-source%E5%B9%B6%E4%BD%BF%E7%94%A8pm-stay-awake-pm-relax-%E9%98%B2%E6%AD%A2%E7%B3%BB%E7%BB%9F%E4%BC%91%E7%9C%A0"><span class="toc-number">6.</span> <span class="toc-text">如何在驱动代码中注册wakeup_source并使用pm_stay_awake()&#x2F;pm_relax()防止系统休眠</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E5%BC%8F%E4%B8%80%EF%BC%9A%E5%9F%BA%E4%BA%8E-struct-device-%E7%9A%84%E6%A0%87%E5%87%86%E6%8E%A5%E5%8F%A3%EF%BC%88%E6%9C%80%E6%8E%A8%E8%8D%90%EF%BC%89"><span class="toc-number">6.1.</span> <span class="toc-text">方式一：基于 struct device 的标准接口（最推荐）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E5%BC%8F%E4%BA%8C%EF%BC%9A%E6%89%8B%E5%8A%A8%E6%B3%A8%E5%86%8C%E7%8B%AC%E7%AB%8B%E7%9A%84-struct-wakeup-source"><span class="toc-number">6.2.</span> <span class="toc-text">方式二：手动注册独立的 struct wakeup_source</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/post/%E7%A7%91%E6%99%AE/159f219f.html" title="硬中断以及原子操作">硬中断以及原子操作</a><time datetime="2026-11-17T12:50:50.000Z" title="更新于 2026-11-17 20:50:50">2026-11-17</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/post/%E7%A7%91%E6%99%AE/e5e6360b.html" title="Linux唤醒源记录节点">Linux唤醒源记录节点</a><time datetime="2026-11-17T12:26:20.000Z" title="更新于 2026-11-17 20:26:20">2026-11-17</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/post/AI%E9%9D%A2%E8%AF%95/4471b76f.html" title="行者无疆BSP面试">行者无疆BSP面试</a><time datetime="2026-11-17T12:19:02.000Z" title="更新于 2026-11-17 20:19:02">2026-11-17</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/post/%E7%A7%91%E6%99%AE/b5b1cb8f.html" title="异构架构">异构架构</a><time datetime="2026-11-17T12:19:02.000Z" title="更新于 2026-11-17 20:19:02">2026-11-17</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/post/33d46ea5.html" title="2611115号漂流瓶">2611115号漂流瓶</a><time datetime="2026-11-17T12:19:02.000Z" title="更新于 2026-11-17 20:19:02">2026-11-17</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By XiaoLi</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.1</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.1"></script><script src="/js/main.js?v=5.5.1"></script><script src="/js/tw_cn.js?v=5.5.1"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js"></script><div class="js-pjax"></div><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/dist/canvas-fluttering-ribbon.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
